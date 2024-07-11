@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """ Minimum operations """
 
 
@@ -18,6 +19,5 @@ def minOperations(n):
             while n % prime_factor == 0:
                 operations += prime_factor
                 n /= prime_factor
-                prime_factor += 1
-
-            return operations
+            prime_factor += 1
+        return operations
