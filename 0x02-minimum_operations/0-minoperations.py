@@ -15,9 +15,9 @@ def minOperations(n):
 
     while n > 1:
         while n > 1:
-            while n & prime_factor == 0:
-                operations prime_factor += 0:
-                    n /= prime_factor
+            while n % prime_factor == 0:
+                operations += prime_factor
+                n /= prime_factor
                 prime_factor += 1
 
             return operations
