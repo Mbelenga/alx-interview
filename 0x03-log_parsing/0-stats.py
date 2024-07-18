@@ -34,6 +34,8 @@ def print_stats(stats, file_size):
                 if count % 10 == 0:
                     print_stats(stats, file_size)
 
-            except keyboardInterrupt:
-                print_stats(stats, file_size)
-                raise
+            print_stats(stats, file_size)
+
+        except keyboardInterrupt:
+            print_stats(stats, file_size)
+            raise
