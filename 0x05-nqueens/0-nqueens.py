@@ -1,49 +1,59 @@
 #!/usr/bin/python3
-""" N queens """
+"""doc doc doc"""
 import sys
 
 
-def is_safe(board, row, col, n):
-    """ check if its safe to place a queen on the board """
-    for idx in range(row):
-        if board[idx] == col or  \
-           board[idx] - idx == col - row or \
-           board[idx] + idx == col + row:
-            return False
-    return True
+def solve_queens_problem(board_size):
+    """doc doc doc"""
+
+    def is_valid_position(pos, occupied_pos):
+        """doc doc doc"""
+        for i in range(len(occupied_pos)):
+            if (
+                occupied_pos[i] == pos or
+                occupied_pos[i] - i == pos - len(occupied_pos) or
+                occupied_pos[i] + i == pos + len(occupied_pos)
+            ):
+                return False
+        return True
+
+    def place_queens(board_size, index, occupied_pos, solutions):
+        """doc doc doc"""
+        if index == board_size:
+            solutions.append(occupied_pos[:])
+            return
+
+        for i in range(board_size):
+            if is_valid_position(i, occupied_pos):
+                occupied_pos.append(i)
+                place_queens(board_size, index + 1, occupied_pos, solutions)
+                occupied_pos.pop()
+
+    solutions = []
+    place_queens(board_size, 0, [], solutions)
+    return solutions
 
 
-def print_sol(board):
-    """ solution """
-    print([[idx, board[idx]] for idx in range(len(board))])
-
-
-def solve_nqueens(board, row, n):
-    """ solve """
-    if row == n:
-        print_sol(board)
-        return
-    for col in range(n):
-        if is_safe(board, row, col, n):
-            board[row] = col
-            solve_nqueens(board, row + 1, n)
-
-
-def nqueens(n):
-    """ input check """
-    if not n.isdigit():
-        print("N must be a number")
-        sys.exit(1)
-    n = int(n)
-    if n < 4:
-        print("N must be at least 4")
-        sys.exit(1)
-    board = [-1] * n
-    solve_nqueens(board, 0, n)
-
-
-if __name__ == '__main__':
+def main():
+    """doc doc doc"""
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
-    nqueens(sys.argv[1])
+
+    try:
+        board_size = int(sys.argv[1])
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
+
+    if board_size < 4:
+        print("N must be at least 4")
+        sys.exit(1)
+
+    solutions = solve_queens_problem(board_size)
+    for solution in solutions:
+        print([[i, solution[i]] for i in range(len(solution))])
+
+
+if __name__ == "__main__":
+    main()
