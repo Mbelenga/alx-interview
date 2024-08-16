@@ -11,9 +11,9 @@ def pascal_triangle(n):
     pascal_triangle = [[1]]
     for index in range(1, n):
         row = [1]
-        for index in range(1, index):
-            value = pascal_triangler[index - 1][j - 1] + pascal_triangle[index - 1][j]
-            row.append(value)
-            row.append(1)
-            pascal_triangler.append(row)
-        return pascal_triangle
+        for j in range(1, index):
+            val = pascal_triangle[index - 1][j - 1] + pascal_triangle[index - 1][j]
+            row.append(val)
+        row.append(1)
+        pascal_triangle.append(row)
+    return pascal_triangle
